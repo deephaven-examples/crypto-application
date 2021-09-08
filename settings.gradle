@@ -1,0 +1,22 @@
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'Crypto Sources'
+
+include('schemas')
+include('xchange-adapter')
+
+include(':kafka-common')
+project(':kafka-common').projectDir = file('kafka/kafka-common')
+
+include('kafka-publisher')
+project(':kafka-publisher').projectDir = file('kafka/kafka-publisher')
+
+include('kafka-consumer')
+project(':kafka-consumer').projectDir = file('kafka/kafka-consumer')
+
+include(':coinbase-pro')
+project(':coinbase-pro').projectDir = file('exchanges/coinbase-pro')

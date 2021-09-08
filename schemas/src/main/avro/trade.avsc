@@ -1,0 +1,51 @@
+{
+  "namespace": "io.deephaven.crypto",
+  "type": "record",
+  "name": "Trade",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-micros"
+      }
+    },
+    {
+      "name": "exchange",
+      "type": "string"
+    },
+    {
+      "name": "instrument",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": {
+        "type": "enum",
+        "name": "TradeType",
+        "symbols" : ["BID", "ASK", "EXIT_ASK", "EXIT_BID"]
+      }
+    },
+    {
+      "name": "price",
+      "type": "double"
+    },
+    {
+      "name": "size",
+      "type": "double"
+    }
+    /*
+    {
+      "name": "price",
+      "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
+    },
+    {
+      "name": "size",
+      "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
+    }*/
+  ]
+}

@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.2.1'
+}
+
+dependencies {
+    api 'org.apache.avro:avro:1.10.2'
+}
+
+spotless {
+    java {
+        targetExclude('build/generated-main-avro-java/**')
+    }
+}

@@ -1,0 +1,55 @@
+{
+  "namespace": "io.deephaven.crypto",
+  "type": "record",
+  "name": "Quote",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-micros"
+      }
+    },
+    {
+      "name": "exchange",
+      "type": "string"
+    },
+    {
+      "name": "instrument",
+      "type": "string"
+    },
+    {
+      "name": "bid",
+      "type": "double"
+    },
+    {
+      "name": "ask",
+      "type": "double"
+    },
+    {
+      "name": "bidSize",
+      "type": "double"
+    },
+    {
+      "name": "askSize",
+      "type": "double"
+    }
+    /*
+    {
+      "name": "bid",
+      "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
+    },
+    {
+      "name": "ask",
+      "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
+    },
+    {
+      "name": "bidSize",
+      "type": [ "null", {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8} ]
+    },
+    {
+      "name": "askSize",
+      "type": [ "null", {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8} ]
+    }*/
+  ]
+}

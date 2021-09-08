@@ -1,0 +1,62 @@
+plugins {
+    id 'application'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.2.1'
+    id 'com.bmuschko.docker-java-application' version '6.7.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://packages.confluent.io/maven/'
+    }
+}
+
+dependencies {
+    implementation 'org.apache.kafka:kafka-clients:2.8.0'
+    implementation 'io.confluent:kafka-avro-serializer:6.2.0'
+
+    implementation project(':kafka-common')
+    implementation project(':schemas')
+    implementation project(':xchange-adapter')
+    implementation project(':coinbase-pro')
+
+    runtimeOnly 'ch.qos.logback:logback-classic:1.2.3'
+}
+
+application {
+    mainClass = 'io.deephaven.crypto.kafka.KafkaPublisher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+docker {
+    javaApplication {
+        baseImage = 'docker.io/azul/zulu-openjdk-debian@sha256:75c283c625e4403fbf10a60642fc2fcac70b5ac55213f77c6453bbe1fda4a8c7'
+        images = ['deephaven/crypto-publisher:latest']
+        maintainer = 'Devin Smith "devinsmith@deephaven.io"'
+        jvmArgs = [
+            '-server',
+            '-XX:+UseG1GC',
+            '-XX:MaxGCPauseMillis=100',
+            '-XX:+UseStringDeduplication',
+            // Add for debugging, select port to match what you expect from your debugger/IDE side.
+            // '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005',
+
+            // Settings based on the cgroup limits:
+            // https://www.oracle.com/java/technologies/javase/8u191-relnotes.html
+            // the initial memory reservation, expressed as a percentage of (todo - is this as a percentage against the JVMs computed maximum, or the system memory?)
+            // Note: this feature works w/ cgroups v1, and not cgroups v2 *yet* (except in java 15+).
+            // Maybe we can request backport: https://bugs.openjdk.java.net/browse/JDK-8230305 ?
+            // https://www.redhat.com/sysadmin/fedora-31-control-group-v2
+            '-XX:InitialRAMPercentage=25.0',
+            // the percentage of system memory that the JVM will use as maximum in low-memory systems
+            '-XX:MinRAMPercentage=70.0',
+            // the percentage of system memory that the JVM will use as maximum
+            '-XX:MaxRAMPercentage=80.0',
+            '-XshowSettings:vm'
+        ]
+    }
+}
+
