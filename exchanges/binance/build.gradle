@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(':xchange-adapter')
+    implementation 'org.knowm.xchange:xchange-binance:5.0.11'
+    implementation 'org.knowm.xchange:xchange-stream-binance:5.0.11'
+}

@@ -18,7 +18,15 @@ dependencies {
     implementation project(':kafka-common')
     implementation project(':schemas')
     implementation project(':xchange-adapter')
-    implementation project(':coinbase-pro')
+
+    // exchanges
+
+    [ 'coinbase-pro', 'binance' ].each { String exchangeName ->
+        if ('true' == project.findProperty("exchange.${exchangeName}.enabled")) {
+            implementation project(":${exchangeName}")
+
+        }
+    }
 
     runtimeOnly 'ch.qos.logback:logback-classic:1.2.3'
 }

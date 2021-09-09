@@ -20,3 +20,6 @@ project(':kafka-consumer').projectDir = file('kafka/kafka-consumer')
 
 include(':coinbase-pro')
 project(':coinbase-pro').projectDir = file('exchanges/coinbase-pro')
+
+include(':binance')
+project(':binance').projectDir = file('exchanges/binance')

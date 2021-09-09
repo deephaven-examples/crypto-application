@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.immutables.value.Value.Default;
 import org.immutables.value.Value.Immutable;
 import org.knowm.xchange.currency.CurrencyPair;
 
@@ -18,11 +19,19 @@ public abstract class Specification {
         .collect(Collectors.toList());
   }
 
-  public abstract QuoteAdapter quoteAdapter();
-
-  public abstract TradeAdapter tradeAdapter();
+  public abstract String exchangeName();
 
   public abstract Class<? extends StreamingExchange> streamingClass();
 
   public abstract List<CurrencyPair> currencyPairs();
+
+  @Default
+  public QuoteAdapter quoteAdapter() {
+    return new QuoteAdapterImpl(exchangeName());
+  }
+
+  @Default
+  public TradeAdapter tradeAdapter() {
+    return new TradeAdapterImpl(exchangeName());
+  }
 }
