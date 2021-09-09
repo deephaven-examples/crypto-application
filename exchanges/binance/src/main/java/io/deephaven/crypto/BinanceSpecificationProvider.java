@@ -15,9 +15,9 @@ public class BinanceSpecificationProvider implements SpecificationProvider {
         ImmutableSpecification.builder()
             .exchangeName(EXCHANGE_NAME)
             .streamingClass(BinanceStreamingExchange.class)
-            .addCurrencyPairs(CurrencyPair.BTC_USD)
-            .addCurrencyPairs(CurrencyPair.ETH_USD)
-            .addCurrencyPairs(CurrencyPair.DOGE_USD)
+            .addCurrencyPairs(CurrencyPair.BTC_USDT)
+            .addCurrencyPairs(CurrencyPair.ETH_USDT)
+            .addCurrencyPairs(CurrencyPair.ETH_BTC)
             .build());
   }
 }
