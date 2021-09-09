@@ -18,7 +18,7 @@ project(':kafka-publisher').projectDir = file('kafka/kafka-publisher')
 include('kafka-consumer')
 project(':kafka-consumer').projectDir = file('kafka/kafka-consumer')
 
-[ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken' ].each { String exchangeName ->
+[ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'lgo' ].each { String exchangeName ->
     include(":${exchangeName}")
     project(":${exchangeName}").projectDir = file("exchanges/${exchangeName}")
 }
