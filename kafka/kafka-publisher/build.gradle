@@ -27,7 +27,7 @@ dependencies {
         }
     }
 
-    runtimeOnly 'ch.qos.logback:logback-classic:1.2.3'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.2.5'
 }
 
 application {
@@ -41,7 +41,7 @@ tasks.named('test') {
 docker {
     javaApplication {
         baseImage = 'docker.io/azul/zulu-openjdk-debian@sha256:75c283c625e4403fbf10a60642fc2fcac70b5ac55213f77c6453bbe1fda4a8c7'
-        images = ['deephaven/crypto-publisher:latest']
+        images = [ 'deephaven/crypto-publisher:local-build' ]
         maintainer = 'Devin Smith "devinsmith@deephaven.io"'
         jvmArgs = [
             '-server',

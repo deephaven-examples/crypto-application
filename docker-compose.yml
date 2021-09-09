@@ -1,0 +1,114 @@
+version: "3.4"
+
+services:
+  # Publishes crypto data to kafka
+  crypto-publisher:
+    # ./gradlew kafka-publisher:dockerBuildImage
+    image: deephaven/crypto-publisher:local-build
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx4g
+      DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8080/api/ccompat
+    depends_on:
+      - redpanda
+      - registry
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4500M
+        reservations:
+          memory: 1000M
+
+  # Consumes crypto data from kafka
+  grpc-api:
+    # ./gradlew kafka-consumer:buildDocker
+    # An extension of grpc-api
+    image: deephaven/crypto-consumer:local-build
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
+      DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8080/api/ccompat
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4500M
+        reservations:
+          memory: 1000M
+    depends_on:
+      - redpanda
+      - registry
+    volumes:
+      - data:/data
+
+  redpanda:
+    image: docker.vectorized.io/vectorized/redpanda:v21.4.13
+    command:
+      - redpanda
+      - start
+      - --smp
+      - '1'
+      - --reserve-memory
+      - 0M
+      - --overprovisioned
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
+
+  registry:
+    image: apicurio/apicurio-registry-mem:1.2.2.Final
+    expose:
+      - 8080
+    environment:
+      QUARKUS_PROFILE: prod
+      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
+      APPLICATION_ID: registry_id
+    depends_on:
+      - redpanda
+
+  web:
+    image: deephaven/web:local-build
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    volumes:
+      - web-tmp:/tmp
+      - data:/data
+
+  grpc-proxy:
+    image: deephaven/grpc-proxy:local-build
+    environment:
+      - BACKEND_ADDR=grpc-api:8080
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    depends_on:
+      - grpc-api
+
+  envoy:
+    # A reverse proxy configured for no SSL on localhost. It fronts the requests
+    # for the static content and the websocket proxy.
+    image: deephaven/envoy:local-build
+    ports:
+      - "10042:10000"
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    depends_on:
+      - web
+      - grpc-proxy
+      - grpc-api
+
+volumes:
+  web-tmp:
+  data:

@@ -1,8 +1,32 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 plugins {
     id 'java-library'
+    id 'com.bmuschko.docker-remote-api' version '6.7.0'
 }
 
 dependencies {
+    api project(':kafka-common')
+
     // To be provided by the DH environment
     compileOnly 'io.deephaven:deephaven-table-api:0.4.1'
+}
+
+task prepareDocker(type: Sync) {
+    from 'src/main/docker/Dockerfile'
+    from('src/main/app.d'){
+        into 'app.d'
+    }
+    from(configurations.runtimeClasspath) {
+        into 'libs'
+    }
+    from(jar) {
+        into 'libs'
+    }
+    into 'build/docker'
+}
+
+task buildDocker(type: DockerBuildImage) {
+    dependsOn prepareDocker
+    images.add('deephaven/crypto-consumer:local-build')
 }
