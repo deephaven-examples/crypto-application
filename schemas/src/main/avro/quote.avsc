@@ -4,7 +4,7 @@
   "name": "Quote",
   "fields": [
     {
-      "name": "timestamp",
+      "name": "Timestamp",
       "type": [
         "null",
         {
@@ -14,44 +14,44 @@
       ]
     },
     {
-      "name": "exchange",
+      "name": "Exchange",
       "type": "string"
     },
     {
-      "name": "instrument",
+      "name": "Instrument",
       "type": "string"
     },
     {
-      "name": "bid",
+      "name": "Bid",
       "type": "double"
     },
     {
-      "name": "ask",
+      "name": "Ask",
       "type": "double"
     },
     {
-      "name": "bidSize",
+      "name": "BidSize",
       "type": "double"
     },
     {
-      "name": "askSize",
+      "name": "AskSize",
       "type": "double"
     }
     /*
     {
-      "name": "bid",
+      "name": "Bid",
       "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
     },
     {
-      "name": "ask",
+      "name": "Ask",
       "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
     },
     {
-      "name": "bidSize",
+      "name": "BidSize",
       "type": [ "null", {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8} ]
     },
     {
-      "name": "askSize",
+      "name": "AskSize",
       "type": [ "null", {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8} ]
     }*/
   ]

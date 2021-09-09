@@ -1,3 +1,8 @@
 plugins {
     id 'java-library'
 }
+
+dependencies {
+    // To be provided by the DH environment
+    compileOnly 'io.deephaven:deephaven-table-api:0.4.1'
+}

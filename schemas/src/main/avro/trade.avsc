@@ -4,11 +4,11 @@
   "name": "Trade",
   "fields": [
     {
-      "name": "id",
+      "name": "Id",
       "type": [ "null", "string" ]
     },
     {
-      "name": "timestamp",
+      "name": "Timestamp",
       "type": [
         "null",
         {
@@ -18,15 +18,15 @@
       ]
     },
     {
-      "name": "exchange",
+      "name": "Exchange",
       "type": "string"
     },
     {
-      "name": "instrument",
+      "name": "Instrument",
       "type": "string"
     },
     {
-      "name": "type",
+      "name": "Type",
       "type": {
         "type": "enum",
         "name": "TradeType",
@@ -34,20 +34,20 @@
       }
     },
     {
-      "name": "price",
+      "name": "Price",
       "type": "double"
     },
     {
-      "name": "size",
+      "name": "Size",
       "type": "double"
     }
     /*
     {
-      "name": "price",
+      "name": "Price",
       "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
     },
     {
-      "name": "size",
+      "name": "Size",
       "type": {"type": "bytes", "logicalType": "decimal", "precision": 16, "scale": 8}
     }*/
   ]
