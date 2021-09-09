@@ -11,13 +11,13 @@ deephaven-core$ ./gradlew prepareCompose
 ### Development build
 
 ```
-$ ./gradlew kafka-publisher:dockerBuildImage kafka-consumer:buildDocker
+$ ./gradlew kafka-publisher:dockerBuildImage kafka-consumer:buildDocker kafka-web:buildDocker
 ```
 
 Note: when making changes to `deephaven-core`, you'll want to make sure you execute a clean build, as the `deephaven-core` changes don't cause a cache-invalidation in this project (yet):
 
 ```
-./gradlew clean kafka-publisher:dockerBuildImage kafka-consumer:buildDocker
+./gradlew clean kafka-publisher:dockerBuildImage kafka-consumer:buildDocker kafka-web:buildDocker
 ```
 
 ### Development launch

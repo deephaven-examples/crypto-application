@@ -39,8 +39,16 @@ services:
     depends_on:
       - redpanda
       - registry
-    volumes:
-      - data:/data
+
+  web:
+    # ./gradlew kafka-web:buildDocker
+    # An extension of web
+    image: deephaven/crypto-web:local-build
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
 
   redpanda:
     image: docker.vectorized.io/vectorized/redpanda:v21.4.13
@@ -70,17 +78,6 @@ services:
     depends_on:
       - redpanda
 
-  web:
-    image: deephaven/web:local-build
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 256M
-    volumes:
-      - web-tmp:/tmp
-      - data:/data
-
   grpc-proxy:
     image: deephaven/grpc-proxy:local-build
     environment:
@@ -108,7 +105,3 @@ services:
       - web
       - grpc-proxy
       - grpc-api
-
-volumes:
-  web-tmp:
-  data:

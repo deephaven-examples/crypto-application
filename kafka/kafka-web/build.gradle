@@ -1,0 +1,18 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+plugins {
+    id 'com.bmuschko.docker-remote-api' version '6.7.0'
+}
+
+task prepareDocker(type: Sync) {
+    from 'src/main/docker/Dockerfile'
+    from('src/main/layouts'){
+        into 'layouts'
+    }
+    into 'build/docker'
+}
+
+task buildDocker(type: DockerBuildImage) {
+    dependsOn prepareDocker
+    images.add('deephaven/crypto-web:local-build')
+}
