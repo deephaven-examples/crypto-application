@@ -21,7 +21,7 @@ dependencies {
 
     // exchanges
 
-    [ 'binance', 'coinbase-pro', 'gemini', 'kraken' ].each { String exchangeName ->
+    [ 'binance', 'bitfinex', 'coinbase-pro', 'gemini', 'kraken' ].each { String exchangeName ->
         if ('true' == project.findProperty("exchange.${exchangeName}.enabled")) {
             implementation project(":${exchangeName}")
 
