@@ -16,7 +16,7 @@ public final class TradeAdapterImpl implements TradeAdapter {
     return Trade.newBuilder()
         .setExchange(exchangeName)
         .setId(trade.getId())
-        .setTimestamp(trade.getTimestamp().toInstant())
+        .setTimestamp(trade.getTimestamp() == null ? null : trade.getTimestamp().toInstant())
         .setInstrument(trade.getInstrument().toString())
         .setType(adapt(trade.getType()))
         .setPrice(DeephavenHelper.adapt(trade.getPrice()))

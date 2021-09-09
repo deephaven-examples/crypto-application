@@ -5,10 +5,13 @@
   "fields": [
     {
       "name": "timestamp",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-micros"
-      }
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-micros"
+        }
+      ]
     },
     {
       "name": "exchange",

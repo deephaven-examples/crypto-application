@@ -14,7 +14,7 @@ public final class QuoteAdapterImpl implements QuoteAdapter {
   public Quote adapt(Ticker ticker) {
     return Quote.newBuilder()
         .setExchange(exchangeName)
-        .setTimestamp(ticker.getTimestamp().toInstant())
+        .setTimestamp(ticker.getTimestamp() == null ? null : ticker.getTimestamp().toInstant())
         .setInstrument(ticker.getInstrument().toString())
         .setBid(DeephavenHelper.adapt(ticker.getBid()))
         .setAsk(DeephavenHelper.adapt(ticker.getAsk()))
