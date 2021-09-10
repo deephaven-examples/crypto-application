@@ -30,3 +30,5 @@ task buildDocker(type: DockerBuildImage) {
     dependsOn prepareDocker
     images.add('deephaven/crypto-consumer:local-build')
 }
+
+assemble.dependsOn buildDocker
