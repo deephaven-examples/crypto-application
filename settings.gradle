@@ -1,9 +1,3 @@
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
-}
-
 rootProject.name = 'Crypto Sources'
 
 include('schemas')
