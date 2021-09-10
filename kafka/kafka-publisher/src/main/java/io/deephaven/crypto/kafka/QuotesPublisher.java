@@ -30,9 +30,14 @@ public class QuotesPublisher implements Observer<Quote>, Callback {
   @Override
   public void onNext(Quote quote) {
     final ProducerRecord<String, Quote> record =
-        new ProducerRecord<>(Configuration.quotesTopic(), quote.getInstrument(), quote);
+        new ProducerRecord<>(Configuration.quotesTopic(), key(quote), quote);
     log.trace("{}", quote);
     producer.send(record, this);
+  }
+
+  private String key(Quote quote) {
+    // Not using any keys
+    return null;
   }
 
   @Override

@@ -30,9 +30,14 @@ public class TradesPublisher implements Observer<Trade>, Callback {
   @Override
   public void onNext(Trade trade) {
     final ProducerRecord<String, Trade> record =
-        new ProducerRecord<>(Configuration.tradesTopic(), trade.getInstrument(), trade);
+        new ProducerRecord<>(Configuration.tradesTopic(), key(trade), trade);
     log.trace("{}", trade);
     producer.send(record, this);
+  }
+
+  private String key(Trade trade) {
+    // Not using any key
+    return null;
   }
 
   @Override

@@ -14,8 +14,7 @@ public class Configuration {
   public static String schemaRegistryUrl() {
     return System.getProperty(
         "deephaven.schema.registry.url",
-        System.getenv()
-            .getOrDefault("DEEPHAVEN_SCHEMA_REGISTRY_URL", "http://localhost:8081/api/ccompat"));
+        System.getenv().getOrDefault("DEEPHAVEN_SCHEMA_REGISTRY_URL", "http://localhost:8081"));
   }
 
   public static String quotesTopic() {
