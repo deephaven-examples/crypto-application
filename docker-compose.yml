@@ -8,7 +8,7 @@ services:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
-      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8080/api/ccompat
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8081
     depends_on:
       - redpanda
       - registry
@@ -28,7 +28,7 @@ services:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
-      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8080/api/ccompat
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8081
     deploy:
       resources:
         limits:
@@ -51,7 +51,7 @@ services:
           memory: 256M
 
   redpanda:
-    image: docker.vectorized.io/vectorized/redpanda:v21.4.13
+    image: docker.vectorized.io/vectorized/redpanda:v21.8.2
     command:
       - redpanda
       - start
@@ -68,15 +68,15 @@ services:
       - PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
 
   registry:
-    image: apicurio/apicurio-registry-mem:1.2.2.Final
-    expose:
-      - 8080
-    environment:
-      QUARKUS_PROFILE: prod
-      KAFKA_BOOTSTRAP_SERVERS: redpanda:9092
-      APPLICATION_ID: registry_id
+    image: confluentinc/cp-schema-registry:6.2.0
+    hostname: registry
     depends_on:
       - redpanda
+    ports:
+      - 8081:8081
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: redpanda:29092
 
   grpc-proxy:
     image: deephaven/grpc-proxy:local-build
