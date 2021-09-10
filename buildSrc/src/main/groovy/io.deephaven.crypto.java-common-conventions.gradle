@@ -17,6 +17,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 }
 
+archivesBaseName = "deephaven-crypto-${project.name}"
+
 tasks.withType(JavaCompile).configureEach {
     JavaCompile javac ->
         javac.options.encoding = 'UTF-8'
