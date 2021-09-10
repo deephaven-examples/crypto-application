@@ -7,6 +7,9 @@ repositories {
     mavenCentral()
 }
 
+group = 'io.deephaven.crypto'
+version = '0.0.1'
+
 dependencies {
     constraints {
         // todo
