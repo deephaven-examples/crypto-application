@@ -8,10 +8,9 @@ services:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
-      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8081
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://redpanda:8081
     depends_on:
       - redpanda
-      - registry
     deploy:
       resources:
         limits:
@@ -28,7 +27,7 @@ services:
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
-      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://registry:8081
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://redpanda:8081
     deploy:
       resources:
         limits:
@@ -38,7 +37,6 @@ services:
           memory: 1000M
     depends_on:
       - redpanda
-      - registry
 
   web:
     # ./gradlew kafka-web:buildDocker
@@ -54,6 +52,8 @@ services:
     image: docker.vectorized.io/vectorized/redpanda:v21.8.2
     volumes:
       - redpanda:/var/lib/redpanda/data
+    expose:
+      - 8081
     command:
       - redpanda
       - start
@@ -68,17 +68,6 @@ services:
       - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
       - --advertise-kafka-addr
       - PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
-
-  registry:
-    image: confluentinc/cp-schema-registry:6.2.0
-    hostname: registry
-    depends_on:
-      - redpanda
-    ports:
-      - 8081:8081
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: registry
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: redpanda:29092
 
   grpc-proxy:
     image: deephaven/grpc-proxy:local-build
