@@ -17,8 +17,20 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+tasks.withType(JavaCompile).configureEach {
+    JavaCompile javac ->
+        javac.options.encoding = 'UTF-8'
+}
+
+tasks.withType(Jar).configureEach {
+    Jar jar ->
+        jar.preserveFileTimestamps = false
+        jar.reproducibleFileOrder = true
+}
+
+tasks.withType(Test).configureEach {
+    Test test ->
+        test.useJUnitPlatform()
 }
 
 java {
