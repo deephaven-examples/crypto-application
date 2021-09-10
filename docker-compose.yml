@@ -52,6 +52,8 @@ services:
 
   redpanda:
     image: docker.vectorized.io/vectorized/redpanda:v21.8.2
+    volumes:
+      - redpanda:/var/lib/redpanda/data
     command:
       - redpanda
       - start
@@ -105,3 +107,6 @@ services:
       - web
       - grpc-proxy
       - grpc-api
+
+volumes:
+  redpanda:
