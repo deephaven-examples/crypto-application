@@ -1,0 +1,4 @@
+plugins {
+    id 'io.deephaven.crypto.java-common-conventions'
+    id 'java-library'
+}

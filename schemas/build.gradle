@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'io.deephaven.crypto.java-library-conventions'
     id 'com.github.davidmc24.gradle.plugin.avro' version '1.2.1'
 }
 
