@@ -20,6 +20,7 @@ def get_trades_stream():
         configuration().tradesTopic(),
         key = kt.IGNORE,
         value = kt.avro(configuration().tradeSchema()),
+        offsets=kt.ALL_PARTITIONS_SEEK_TO_BEGINNING,
         table_type='stream')\
         .dropColumns("KafkaPartition", "KafkaOffset", "KafkaTimestamp")
 
