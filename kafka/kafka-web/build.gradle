@@ -5,17 +5,32 @@ plugins {
     id 'com.bmuschko.docker-remote-api' version '6.7.0'
 }
 
-task prepareDocker(type: Sync) {
+task prepareDockerApplication(type: Sync) {
     from 'src/main/docker/Dockerfile'
-    from('src/main/layouts'){
+    from('src/main/layouts.application'){
         into 'layouts'
     }
-    into 'build/docker'
+    into 'build/prepareDockerApplication'
 }
 
-task buildDocker(type: DockerBuildImage) {
-    dependsOn prepareDocker
-    images.add('deephaven/crypto-web:local-build')
+task prepareDockerTutorial(type: Sync) {
+    from 'src/main/docker/Dockerfile'
+    from('src/main/layouts.tutorial'){
+        into 'layouts'
+    }
+    into 'build/prepareDockerTutorial'
 }
 
-assemble.dependsOn buildDocker
+task buildDockerApplication(type: DockerBuildImage) {
+    dependsOn prepareDockerApplication
+    inputDir.set(file('build/prepareDockerApplication'))
+    images.add('deephaven/crypto-web-app:local-build')
+}
+
+task buildDockerTutorial(type: DockerBuildImage) {
+    dependsOn prepareDockerTutorial
+    inputDir.set(file('build/prepareDockerTutorial'))
+    images.add('deephaven/crypto-web-tutorial:local-build')
+}
+
+assemble.dependsOn buildDockerApplication, buildDockerTutorial

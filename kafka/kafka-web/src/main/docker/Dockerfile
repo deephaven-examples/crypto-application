@@ -1,4 +1,4 @@
 FROM deephaven/web:local-build
 
-# Add our layouts directory
+# Add the layouts directory
 COPY --chown=www-data layouts/ /data/layouts

@@ -1,0 +1,598 @@
+[
+  {
+    "type": "column",
+    "isClosable": true,
+    "reorderEnabled": true,
+    "title": "",
+    "content": [
+      {
+        "type": "row",
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "height": 31.04508196721312,
+        "content": [
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "width": 64.23469387755101,
+            "height": 31.04508196721312,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "MarkdownPanel",
+                "props": {
+                  "metadata": {},
+                  "panelState": {
+                    "content": "### Crypto Application\n\nWelcome to the **crypto application**!\n\n*Trades Summary* is an aggregation of the trading volume by exchange, instrument, and type.\n*USD Prices* is joined in to create the normalized column *DollarVolume*.\n\n*USD Prices* is derived from *Quotes Latest* as the median *Bid*/*Ask* for the instruments quoted in USD or USDT.\n\n*Quotes Latest* is the latest quote by exchange and instrument. It is derived from *Quotes Stream*, a one-shot stream of quotes.\n\n*Trades Latest* is the latest trades by instrument, and type. It is derived from *Trades Stream*, a one-shot stream of trades.\n\n"
+                  }
+                },
+                "title": "Crypto Application",
+                "id": "3QjHUCeIp",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              },
+              {
+                "component": "LogPanel",
+                "isClosable": false,
+                "title": "Log",
+                "type": "react-component",
+                "props": {},
+                "id": "PKcCp3L3D",
+                "componentName": "lm-react-component",
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          },
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "height": 100,
+            "width": 35.765306122448976,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdXNkX3ByaWNlcw=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [
+                        [
+                          "USD",
+                          {
+                            "columnType": "decimal",
+                            "columnName": "USD",
+                            "format": {
+                              "label": "Custom Format",
+                              "type": "type-context-custom",
+                              "formatString": "$ #,##0.00",
+                              "multiplier": null
+                            }
+                          }
+                        ]
+                      ],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [
+                        {
+                          "column": 0,
+                          "isAbs": false,
+                          "direction": "ASC"
+                        }
+                      ],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "USD Prices",
+                "id": "REACgFWsf",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              },
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2Yvc3RhcnRfdGltZQ=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Start Time",
+                "id": "7L7hnDwWa",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "row",
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "height": 68.95491803278689,
+        "content": [
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "height": 100,
+            "width": 53.31564986737402,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX3N1bW1hcnk="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [
+                        [
+                          "DollarVolume",
+                          {
+                            "columnType": "decimal",
+                            "columnName": "DollarVolume",
+                            "format": {
+                              "label": "Custom Format",
+                              "type": "type-context-custom",
+                              "formatString": "$ #,###",
+                              "multiplier": null
+                            }
+                          }
+                        ]
+                      ],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [
+                        {
+                          "column": 9,
+                          "isAbs": false,
+                          "direction": "DESC"
+                        }
+                      ],
+                      "userColumnWidths": [
+                        [
+                          "USD",
+                          0
+                        ]
+                      ],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [
+                        {
+                          "to": "Type",
+                          "from": "USD"
+                        },
+                        {
+                          "to": "Type",
+                          "from": "USD"
+                        },
+                        {
+                          "to": "DollarVolume",
+                          "from": "Count"
+                        },
+                        {
+                          "to": "Volume",
+                          "from": "USD"
+                        }
+                      ],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Trades Summary",
+                "id": "V__BuN4kl",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              },
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX2xhdGVzdA=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [
+                        {
+                          "column": 1,
+                          "isAbs": false,
+                          "direction": "ASC"
+                        },
+                        {
+                          "column": 0,
+                          "isAbs": false,
+                          "direction": "ASC"
+                        }
+                      ],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Trades Latest",
+                "id": "SO5LQ7CLh",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              },
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX3N0cmVhbQ=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Trades Stream",
+                "id": "l8VHVY6Iu",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          },
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "width": 46.68435013262601,
+            "height": 100,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvcXVvdGVzX2xhdGVzdA=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [
+                        {
+                          "column": 1,
+                          "isAbs": false,
+                          "direction": "ASC"
+                        },
+                        {
+                          "column": 0,
+                          "isAbs": false,
+                          "direction": "ASC"
+                        }
+                      ],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [
+                        {
+                          "to": "Bid",
+                          "from": "BidSize"
+                        }
+                      ],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Quotes Latest",
+                "id": "cYq4VLtfI",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              },
+              {
+                "type": "react-component",
+                "component": "IrisGridPanel",
+                "props": {
+                  "metadata": {
+                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvcXVvdGVzX3N0cmVhbQ=="
+                  },
+                  "panelState": {
+                    "irisGridPanelState": {
+                      "isSelectingPartition": false,
+                      "partition": null,
+                      "partitionColumn": null
+                    },
+                    "irisGridState": {
+                      "advancedFilters": [],
+                      "advancedSettings": [
+                        [
+                          "filter-control-change-clears-all-filters",
+                          false
+                        ],
+                        [
+                          "link-change-clears-all-filters",
+                          false
+                        ]
+                      ],
+                      "aggregationSettings": {
+                        "aggregations": [],
+                        "showOnTop": false
+                      },
+                      "customColumnFormatMap": [],
+                      "isFilterBarShown": false,
+                      "quickFilters": [],
+                      "sorts": [],
+                      "userColumnWidths": [],
+                      "userRowHeights": [],
+                      "customColumns": [],
+                      "reverseType": "none",
+                      "rollupConfig": null,
+                      "showSearchBar": false,
+                      "searchValue": "",
+                      "selectDistinctColumns": [],
+                      "selectedSearchColumns": [],
+                      "invertSearchColumns": true,
+                      "pendingDataMap": []
+                    },
+                    "gridState": {
+                      "movedColumns": [],
+                      "movedRows": []
+                    }
+                  }
+                },
+                "title": "Quotes Stream",
+                "id": "1mhqS2-lh",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

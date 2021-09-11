@@ -1,7 +1,7 @@
 FROM deephaven/grpc-api:local-build
 
-# Add our extra libraries to the classpath
+# Add the extra libraries to the classpath
 COPY libs/ /app/libs
 
-# Add our application directory
+# Add the application directory
 COPY app.d/ /app.d

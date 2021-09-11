@@ -1,0 +1,111 @@
+[
+  {
+    "type": "row",
+    "isClosable": true,
+    "reorderEnabled": true,
+    "title": "",
+    "content": [
+      {
+        "type": "column",
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "width": 78.1708945260347,
+        "content": [
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "width": 45.38905151711686,
+            "height": 53.889943074003796,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "MarkdownPanel",
+                "props": {
+                  "metadata": {},
+                  "panelState": {
+                    "content": "# Crypto Example\n\nWelcome to the crypto example. There is currently a kafka publisher and kafka server running as separate processes.\nFollow along to pull and join the data into Deephaven!\n\n### TL;DR\n\nCheat mode, to run everything:\n\n```python\ncrypto_start()\n```\n\n## \"Long\" version\n\n### Get quotes from kafka stream and compute USD prices\n\n```python\nquotes_stream = get_quotes_stream()\nquotes_latest = quotes_stream.lastBy(\"Exchange\", \"Instrument\")\nusd_prices = get_usd_prices(quotes_latest)\n```\n\n### Get trades from kafka stream and compute summary\n\n```python\ntrades_stream = get_trades_stream()\ntrades_latest = trades_stream.lastBy(\"Exchange\", \"Instrument\", \"Type\")\ntrades_summary = get_trades_summary(trades_stream, usd_prices)\n```"
+                  }
+                },
+                "title": "Crypto Example",
+                "id": "KIRCeDdjY",
+                "componentName": "lm-react-component",
+                "isClosable": true,
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          },
+          {
+            "type": "stack",
+            "header": {},
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "activeItemIndex": 0,
+            "height": 46.110056925996204,
+            "content": [
+              {
+                "type": "react-component",
+                "component": "ConsolePanel",
+                "title": "Console",
+                "isClosable": false,
+                "id": "CUWjnkBUi",
+                "props": {
+                  "metadata": {},
+                  "panelState": {
+                    "consoleSettings": {},
+                    "itemIds": []
+                  }
+                },
+                "componentName": "lm-react-component",
+                "reorderEnabled": true,
+                "componentState": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "stack",
+        "width": 21.829105473965278,
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "activeItemIndex": 0,
+        "height": 100,
+        "content": [
+          {
+            "type": "react-component",
+            "component": "CommandHistoryPanel",
+            "title": "Command History",
+            "isClosable": false,
+            "id": "DaiAvQtiXK",
+            "props": {
+              "metadata": {},
+              "panelState": {}
+            },
+            "componentName": "lm-react-component",
+            "reorderEnabled": true,
+            "componentState": null
+          },
+          {
+            "type": "react-component",
+            "component": "FileExplorerPanel",
+            "title": "File Explorer",
+            "isClosable": false,
+            "id": "6Vc7vbdlnQ",
+            "props": {},
+            "componentName": "lm-react-component",
+            "reorderEnabled": true,
+            "componentState": null
+          }
+        ]
+      }
+    ]
+  }
+]
