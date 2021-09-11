@@ -37,6 +37,9 @@ services:
           memory: 1000M
     depends_on:
       - redpanda
+    volumes:
+      - data:/data
+      - cache:/cache
 
   web:
     # ./gradlew kafka-web:buildDocker
@@ -47,6 +50,8 @@ services:
         limits:
           cpus: '1'
           memory: 256M
+    volumes:
+      - web-tmp:/tmp
 
   redpanda:
     image: docker.vectorized.io/vectorized/redpanda:v21.8.2
@@ -100,3 +105,6 @@ services:
 
 volumes:
   redpanda:
+  data:
+  web-tmp:
+  cache:
