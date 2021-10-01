@@ -68,7 +68,7 @@ services:
       - PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
 
   grpc-proxy:
-    image: ghcr.io/deephaven/grpc-proxy:0.4.0
+    image: ghcr.io/deephaven/grpc-proxy:0.5.0
     environment:
       - BACKEND_ADDR=grpc-api:8080
     deploy:
@@ -80,7 +80,7 @@ services:
       - grpc-api
 
   envoy:
-    image: ghcr.io/deephaven/envoy:0.4.0
+    image: ghcr.io/deephaven/envoy:0.5.0
     ports:
       - "10042:10000"
 

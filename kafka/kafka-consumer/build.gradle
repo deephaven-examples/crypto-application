@@ -9,8 +9,8 @@ dependencies {
     api project(':kafka-common')
 
     // To be provided by the DH environment
-    compileOnly 'io.deephaven:deephaven-table-api:0.4.1'
-    compileOnly 'io.deephaven:deephaven-qst:0.4.1'
+    compileOnly 'io.deephaven:deephaven-table-api:0.5.0'
+    compileOnly 'io.deephaven:deephaven-qst:0.5.0'
 }
 
 task prepareDocker(type: Sync) {
