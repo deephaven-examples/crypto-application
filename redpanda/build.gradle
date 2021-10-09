@@ -1,0 +1,19 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+plugins {
+    id 'base'
+    id 'com.bmuschko.docker-remote-api' version '6.7.0'
+}
+
+task prepareDocker(type: Sync) {
+    from 'src/main/docker/Dockerfile'
+    into 'build/docker'
+}
+
+task buildDocker(type: DockerBuildImage) {
+    dependsOn prepareDocker
+    images.add('deephaven/redpanda:local-build')
+}
+
+assemble.dependsOn buildDocker
+

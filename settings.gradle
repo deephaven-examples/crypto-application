@@ -2,6 +2,7 @@ rootProject.name = 'Crypto Sources'
 
 include('schemas')
 include('xchange-adapter')
+include('redpanda')
 
 include(':kafka-common')
 project(':kafka-common').projectDir = file('kafka/kafka-common')

@@ -54,25 +54,9 @@ services:
       - web-tmp:/tmp
 
   redpanda:
-    image: docker.vectorized.io/vectorized/redpanda:v21.8.2
+    image: deephaven/redpanda:local-build
     volumes:
       - redpanda:/var/lib/redpanda/data
-    expose:
-      - 8081
-    command:
-      - redpanda
-      - start
-      - --smp
-      - '1'
-      - --reserve-memory
-      - 0M
-      - --overprovisioned
-      - --node-id
-      - '0'
-      - --kafka-addr
-      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
-      - --advertise-kafka-addr
-      - PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
 
   grpc-proxy:
     image: deephaven/grpc-proxy:local-build
