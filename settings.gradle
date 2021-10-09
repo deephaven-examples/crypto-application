@@ -13,8 +13,7 @@ project(':kafka-publisher').projectDir = file('kafka/kafka-publisher')
 include('kafka-consumer')
 project(':kafka-consumer').projectDir = file('kafka/kafka-consumer')
 
-include('kafka-web')
-project(':kafka-web').projectDir = file('kafka/kafka-web')
+include('web')
 
 [ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'lgo', 'okcoin', 'okex', 'poloniex' ].each { String exchangeName ->
     include(":${exchangeName}")
