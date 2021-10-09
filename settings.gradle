@@ -4,8 +4,7 @@ include('schemas')
 include('xchange-adapter')
 include('redpanda')
 
-include(':kafka-common')
-project(':kafka-common').projectDir = file('kafka/kafka-common')
+include(':common')
 
 include('kafka-publisher')
 project(':kafka-publisher').projectDir = file('kafka/kafka-publisher')

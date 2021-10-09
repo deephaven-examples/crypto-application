@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-    api project(':kafka-common')
+    api project(':common')
 
     // To be provided by the DH environment
     compileOnly 'io.deephaven:deephaven-table-api:0.5.0'
