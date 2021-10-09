@@ -6,8 +6,7 @@ include('redpanda')
 
 include(':common')
 
-include('kafka-publisher')
-project(':kafka-publisher').projectDir = file('kafka/kafka-publisher')
+include('crypto-publisher')
 
 include('grpc-api')
 
