@@ -87,6 +87,20 @@ services:
       - grpc-proxy
       - grpc-api
 
+  client:
+    image: deephaven/crypto-client:local-build
+    environment:
+      DEEPHAVEN_GRPC_API: grpc-api:8080
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    depends_on:
+      - grpc-api
+    profiles:
+      - donotstart
+
 volumes:
   redpanda:
   data:

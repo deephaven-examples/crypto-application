@@ -12,6 +12,8 @@ include('grpc-api')
 
 include('web')
 
+include('client')
+
 [ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'lgo', 'okcoin', 'okex', 'poloniex' ].each { String exchangeName ->
     include(":${exchangeName}")
     project(":${exchangeName}").projectDir = file("exchanges/${exchangeName}")

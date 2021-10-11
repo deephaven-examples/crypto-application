@@ -1,0 +1,14 @@
+<configuration>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.arrow.memory" level="WARN"/>
+
+    <root level="info">
+        <appender-ref ref="STDERR" /> <!-- all logger logging should go to stderr so we can grab the crypto prices from stdout -->
+    </root>
+</configuration>
