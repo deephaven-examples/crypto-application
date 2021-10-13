@@ -21,7 +21,7 @@ To launch the latest release, run:
 $ docker-compose up -d
 ```
 
-These will launch a self-contained environment at [http://localhost:10042/ide/](http://localhost:10042/ide/).
+This will launch a self-contained environment at [http://localhost:10042/ide/](http://localhost:10042/ide/).
 
 To change the defaults, edit the [environment file](.env).
 
