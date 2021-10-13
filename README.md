@@ -15,23 +15,17 @@ The [client](client) is a stand-alone client that demonstrates pulling the table
 
 ### Launch
 
-To launch the `latest` version (updated every release), run:
+To launch the latest release, run:
 
 ```shell
 $ docker-compose up -d
 ```
 
-To launch the `edge` version (updated every commit to the main branch), or a version built locally, run:
+These will launch a self-contained environment at [http://localhost:10042/ide/](http://localhost:10042/ide/).
 
-```shell
-$ TAG=edge docker-compose up -d
-```
+To change the defaults, edit the [environment file](.env).
 
-These will launch a self-contained environment, and exposes port 10042 by default, [http://localhost:10042/ide/](http://localhost:10042/ide/).
-
-To change the defaults, see the [environment file](.env).
-
-The stand-alone client is not started by default. To see it in action, you can run:
+The stand-alone client is not started by default. To see it in action, run:
 
 ```shell
 $ docker-compose up client
@@ -43,6 +37,12 @@ To build:
 
 ```shell
 $ ./gradlew clean build
+```
+
+To run:
+
+```shell
+$ TAG=edge docker-compose up -d
 ```
 
 To develop against an unreleased version of the Deephaven core images, change the base images as appropriate in [gradle.properties](gradle.properties).
