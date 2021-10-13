@@ -1,0 +1,70 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+
+plugins {
+    id 'io.deephaven.crypto.java-application-conventions'
+    id 'com.bmuschko.docker-java-application' version '7.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://packages.confluent.io/maven/'
+    }
+}
+
+String base = project.property('publisher.base')
+String image = project.property('publisher.image')
+
+dependencies {
+    implementation 'org.apache.kafka:kafka-clients:2.8.0'
+    implementation 'io.confluent:kafka-avro-serializer:6.2.0'
+
+    implementation project(':common')
+    implementation project(':schemas')
+    implementation project(':xchange-adapter')
+
+    // exchanges
+
+    [ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'lgo', 'okcoin', 'okex', 'poloniex' ].each { String exchangeName ->
+        if ('true' == project.findProperty("exchange.${exchangeName}.enabled")) {
+            runtimeOnly project(":${exchangeName}")
+        }
+    }
+
+    runtimeOnly 'ch.qos.logback:logback-classic:1.2.5'
+}
+
+application {
+    mainClass = 'io.deephaven.crypto.kafka.KafkaPublisher'
+    applicationDefaultJvmArgs = [
+        '-server',
+        '-Xmx1g',
+        '-XX:+UseG1GC',
+        '-XX:MaxGCPauseMillis=100',
+        '-XshowSettings:vm'
+    ]
+}
+
+docker {
+    javaApplication {
+        baseImage = base
+        images = [ image ]
+        maintainer = project.property('maintainer')
+        jvmArgs = [
+                '-server',
+                '-Xmx1g',
+                '-XX:+UseG1GC',
+                '-XX:MaxGCPauseMillis=100',
+                '-XshowSettings:vm'
+        ]
+    }
+}
+
+project.tasks.register('pushImage', DockerPushImage) {
+    it.dependsOn dockerBuildImage
+    it.inputs.files dockerBuildImage.outputs.files
+    it.images.add(image)
+}
+
+assemble.dependsOn dockerBuildImage

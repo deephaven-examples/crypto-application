@@ -25,6 +25,10 @@ public class Main {
         .view("USD");
   }
 
+  private static String queryDescription() {
+    return "Get BTC/USD prices";
+  }
+
   public static void main(String[] args) throws Exception {
     final String target = System.getenv("DEEPHAVEN_GRPC_API");
     log.info("Connecting to '{}'...", target);
@@ -43,13 +47,17 @@ public class Main {
             .build()
             .newFlightSession();
 
-    log.info("Executing query...");
+    log.info("Executing query '{}'...", queryDescription());
     try (final TableHandle handle = session.session().batch().execute(query())) {
       for (int i = 0; i < 10; ++i) {
         try (final FlightStream stream = session.stream(handle)) {
           while (stream.next()) {
-            final double btcPrice = ((Float8Vector) stream.getRoot().getVector("USD")).get(0);
-            System.out.printf("%.04f%n", btcPrice);
+            final Float8Vector vector = (Float8Vector) stream.getRoot().getVector("USD");
+            final int count = vector.getValueCount();
+            for (int j = 0; j < count; ++j) {
+              final double btcPrice = vector.get(j);
+              System.out.printf("%.04f%n", btcPrice);
+            }
           }
           Thread.sleep(1000);
         }
