@@ -6,7 +6,7 @@ include('redpanda')
 
 include(':common')
 
-include('crypto-publisher')
+include('publisher')
 
 include('grpc-api')
 

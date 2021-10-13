@@ -1,12 +1,9 @@
-version: "3.4"
+version: "3.8"
 
 services:
-  # Publishes crypto data to kafka
-  crypto-publisher:
-    # ./gradlew kafka-publisher:dockerBuildImage
-    image: deephaven/crypto-publisher:local-build
+  publisher:
+    image: ghcr.io/deephaven-examples/crypto-application-publisher:${TAG}
     environment:
-      JAVA_TOOL_OPTIONS: -Xmx4g
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
       DEEPHAVEN_SCHEMA_REGISTRY_URL: http://redpanda:8081
     depends_on:
@@ -15,15 +12,10 @@ services:
       resources:
         limits:
           cpus: '4.0'
-          memory: 4500M
-        reservations:
-          memory: 1000M
+          memory: 1500M
 
-  # Consumes crypto data from kafka
   grpc-api:
-    # ./gradlew kafka-consumer:buildDocker
-    # An extension of grpc-api
-    image: deephaven/crypto-consumer:local-build
+    image: ghcr.io/deephaven-examples/crypto-application-grpc-api:${TAG}
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
@@ -42,9 +34,7 @@ services:
       - cache:/cache
 
   web:
-    # ./gradlew kafka-web:buildDocker
-    # An extension of web
-    image: deephaven/crypto-web-app:local-build
+    image: ghcr.io/deephaven-examples/crypto-application-web:${TAG}
     deploy:
       resources:
         limits:
@@ -54,12 +44,12 @@ services:
       - web-tmp:/tmp
 
   redpanda:
-    image: deephaven/redpanda:local-build
+    image: ghcr.io/deephaven-examples/crypto-application-redpanda:${TAG}
     volumes:
       - redpanda:/var/lib/redpanda/data
 
   grpc-proxy:
-    image: deephaven/grpc-proxy:local-build
+    image: ghcr.io/deephaven/grpc-proxy:0.5.2
     environment:
       - BACKEND_ADDR=grpc-api:8080
     deploy:
@@ -68,14 +58,13 @@ services:
           cpus: '1'
           memory: 256M
     depends_on:
-      - grpc-api
+      grpc-api:
+        condition: service_healthy
 
   envoy:
-    # A reverse proxy configured for no SSL on localhost. It fronts the requests
-    # for the static content and the websocket proxy.
-    image: deephaven/envoy:local-build
+    image: ghcr.io/deephaven/envoy:0.5.2
     ports:
-      - "10042:10000"
+      - "${PORT}:10000"
 
     deploy:
       resources:
@@ -83,12 +72,15 @@ services:
           cpus: '1'
           memory: 256M
     depends_on:
-      - web
-      - grpc-proxy
-      - grpc-api
+      grpc-api:
+        condition: service_healthy
+      grpc-proxy:
+        condition: service_started
+      web:
+        condition: service_started
 
   client:
-    image: deephaven/crypto-client:local-build
+    image: ghcr.io/deephaven-examples/crypto-application-client:${TAG}
     environment:
       DEEPHAVEN_GRPC_API: grpc-api:8080
     deploy:
@@ -97,7 +89,10 @@ services:
           cpus: '1.0'
           memory: 512M
     depends_on:
-      - grpc-api
+      grpc-api:
+        condition: service_healthy
+      publisher:
+        condition: service_started
     profiles:
       - donotstart
 

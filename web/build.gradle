@@ -1,18 +1,34 @@
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 plugins {
     id 'base'
     id 'com.bmuschko.docker-remote-api' version '7.1.0'
 }
 
+String base = project.property('web.base')
+String image = project.property('web.image')
+def labels = [ 'maintainer': project.property('maintainer') ] + project.properties.findAll { it -> it.key.startsWith('org.opencontainers.image.') }
+
+def dockerfileDest = project.layout.buildDirectory.file('docker/Dockerfile')
 def dockerfileDir = project.layout.buildDirectory.dir('prepareDocker')
 def imageIdFile = project.layout.buildDirectory.file('.docker/imageId.txt').get().asFile
 def imageId = imageIdFile.exists() ? imageIdFile.text : null
-def image = project.property('image') as String
+
+def createDockerfile = project.tasks.register('createDockerfile', Dockerfile) {
+    it.from base
+    // COPY --chown=www-data layouts/ /data/layouts
+    it.copyFile 'layouts', '/data/layouts'
+    it.runCommand 'chown www-data:www-data /data/layouts'
+    it.label(labels)
+    it.destFile.set dockerfileDest
+}
 
 def prepareDocker = project.tasks.register('prepareDocker', Sync) {
-    it.from 'src/main/docker/Dockerfile'
+    it.dependsOn createDockerfile
+    it.from dockerfileDest
     it.from('src/main/layouts.application') {
         into 'layouts'
     }
@@ -26,7 +42,7 @@ def buildImage = project.tasks.register('buildImage', DockerBuildImage) {
     it.images.add(image)
 }
 
-def deleteImage = project.tasks.register('deleteImage', DockerRemoveImage) {
+project.tasks.register('deleteImage', DockerRemoveImage) {
     it.onlyIf { imageId != null }
     it.imageId.set imageId
     it.force.set true
@@ -37,6 +53,13 @@ def deleteImage = project.tasks.register('deleteImage', DockerRemoveImage) {
     it.doLast {
         imageIdFile.delete()
     }
+}
+
+project.tasks.register('pushImage', DockerPushImage) {
+    DockerBuildImage buildImageTask = buildImage.get()
+    it.dependsOn buildImageTask
+    it.inputs.files buildImageTask.outputs.files
+    it.images.add(image)
 }
 
 assemble.dependsOn buildImage

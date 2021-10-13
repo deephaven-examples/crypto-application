@@ -1,11 +1,16 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+
 plugins {
     id 'io.deephaven.crypto.java-application-conventions'
     id 'com.bmuschko.docker-java-application' version '7.1.0'
 }
 
+String deephavenCoreVersion = project.property('deephaven-core.version')
+String base = project.property('client.base')
+String image = project.property('client.image')
 
 dependencies {
-    implementation 'io.deephaven:deephaven-client-flight-dagger:0.5.1'
+    implementation "io.deephaven:deephaven-client-flight-dagger:${deephavenCoreVersion}"
 
     implementation 'org.slf4j:slf4j-api:1.7.32'
     runtimeOnly 'ch.qos.logback:logback-classic:1.2.5'
@@ -18,11 +23,17 @@ application {
 
 docker {
     javaApplication {
-        baseImage = 'docker.io/azul/zulu-openjdk-debian@sha256:75c283c625e4403fbf10a60642fc2fcac70b5ac55213f77c6453bbe1fda4a8c7'
-        images = [ 'deephaven/crypto-client:local-build' ]
-        maintainer = 'Devin Smith "devinsmith@deephaven.io"'
+        baseImage = base
+        images = [ image ]
+        maintainer = project.property('maintainer')
         jvmArgs = [ '-Xmx256m' ]
     }
+}
+
+project.tasks.register('pushImage', DockerPushImage) {
+    it.dependsOn dockerBuildImage
+    it.inputs.files dockerBuildImage.outputs.files
+    it.images.add(image)
 }
 
 assemble.dependsOn dockerBuildImage
