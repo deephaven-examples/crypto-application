@@ -22,7 +22,7 @@ archivesBaseName = "deephaven-crypto-${project.name}"
 tasks.withType(JavaCompile).configureEach {
     JavaCompile javac ->
         javac.options.encoding = 'UTF-8'
-        javac.options.release.set 8
+        //javac.options.release.set 8
 }
 
 tasks.withType(Jar).configureEach {
@@ -38,7 +38,7 @@ tasks.withType(Test).configureEach {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(8)
     }
 }
 
