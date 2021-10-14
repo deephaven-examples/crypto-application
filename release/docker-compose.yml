@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+  publisher:
+    image: ghcr.io/deephaven-examples/crypto-application-publisher:latest
+    environment:
+      DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://redpanda:8081
+    depends_on:
+      - redpanda
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 1500M
+
+  grpc-api:
+    image: ghcr.io/deephaven-examples/crypto-application-grpc-api:latest
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
+      DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
+      DEEPHAVEN_SCHEMA_REGISTRY_URL: http://redpanda:8081
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4500M
+        reservations:
+          memory: 1000M
+    depends_on:
+      - redpanda
+    volumes:
+      - data:/data
+      - cache:/cache
+
+  web:
+    image: ghcr.io/deephaven-examples/crypto-application-web:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    volumes:
+      - web-tmp:/tmp
+
+  redpanda:
+    image: ghcr.io/deephaven-examples/crypto-application-redpanda:latest
+    volumes:
+      - redpanda:/var/lib/redpanda/data
+
+  grpc-proxy:
+    image: ghcr.io/deephaven/grpc-proxy:latest
+    environment:
+      - BACKEND_ADDR=grpc-api:8080
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    depends_on:
+      grpc-api:
+        condition: service_healthy
+
+  envoy:
+    image: ghcr.io/deephaven/envoy:latest
+    ports:
+      - "10042:10000"
+
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    depends_on:
+      grpc-api:
+        condition: service_healthy
+      grpc-proxy:
+        condition: service_started
+      web:
+        condition: service_started
+
+  client:
+    image: ghcr.io/deephaven-examples/crypto-application-client:latest
+    environment:
+      DEEPHAVEN_GRPC_API: grpc-api:8080
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    depends_on:
+      grpc-api:
+        condition: service_healthy
+      publisher:
+        condition: service_started
+    profiles:
+      - donotstart
+
+volumes:
+  redpanda:
+  data:
+  web-tmp:
+  cache:
