@@ -18,7 +18,7 @@ The [client](client) is a stand-alone client that demonstrates pulling the table
 * [docker](https://www.docker.com/) or [docker-compatible](https://podman.io/) engine
 * [docker-compose](https://docs.docker.com/compose/)
 
-### Launch
+### Launch web
 
 To launch the latest release, you can clone the repository and run via:
 
@@ -28,9 +28,7 @@ cd crypto-application
 docker-compose up -d
 ```
 
-This will launch a self-contained environment at [http://localhost:10042/ide/](http://localhost:10042/ide/).
-
-You may download the release [docker-compose.yml](release/docker-compose.yml) file instead of cloning the repository if preferred:
+Or, you may download the release [docker-compose.yml](release/docker-compose.yml) file if preferred:
 
 ```shell
 mkdir crypto-application
@@ -39,11 +37,17 @@ curl https://raw.githubusercontent.com/deephaven-examples/crypto-application/mai
 docker-compose up -d
 ```
 
+This will launch the web server at [http://localhost:10042/ide/](http://localhost:10042/ide/).
+
+### Launch client
+
 The stand-alone client is not started by default. To see it in action, run:
 
 ```shell
 docker-compose up client
 ```
+
+This will connect to the server and print out the real-time BTC/USD prices once a second for ten seconds, then exit.
 
 ### Cleanup
 
