@@ -23,9 +23,9 @@ The [client](client) is a stand-alone client that demonstrates pulling the table
 To launch the latest release, you can clone the repository and run via:
 
 ```shell
-$ git clone https://github.com/deephaven-examples/crypto-application.git
-$ cd crypto-application
-$ docker-compose up -d
+git clone https://github.com/deephaven-examples/crypto-application.git
+cd crypto-application
+docker-compose up -d
 ```
 
 This will launch a self-contained environment at [http://localhost:10042/ide/](http://localhost:10042/ide/).
@@ -33,16 +33,16 @@ This will launch a self-contained environment at [http://localhost:10042/ide/](h
 You may download the release [docker-compose.yml](release/docker-compose.yml) file instead of cloning the repository if preferred:
 
 ```shell
-$ mkdir crypto-application
-$ cd crypto-application
-$ curl https://raw.githubusercontent.com/deephaven-examples/crypto-application/main/release/docker-compose.yml -o docker-compose.yml
-$ docker-compose up -d
+mkdir crypto-application
+cd crypto-application
+curl https://raw.githubusercontent.com/deephaven-examples/crypto-application/main/release/docker-compose.yml -o docker-compose.yml
+docker-compose up -d
 ```
 
 The stand-alone client is not started by default. To see it in action, run:
 
 ```shell
-$ docker-compose up client
+docker-compose up client
 ```
 
 ### Cleanup
@@ -50,13 +50,13 @@ $ docker-compose up client
 The default configuration creates a few named volumes. If you want to delete just the containers, run:
 
 ```shell
-$ docker-compose down
+docker-compose down
 ```
 
 If you want to delete the containers and the volumes, run:
 
 ```shell
-$ docker-compose down -v
+docker-compose down -v
 ```
 
 ### Development
@@ -69,13 +69,13 @@ $ docker-compose down -v
 #### Build
 
 ```shell
-$ ./gradlew clean build
+./gradlew clean build
 ```
 
 #### Run
 
 ```shell
-$ TAG=edge docker-compose up -d
+TAG=edge docker-compose up -d
 ```
 
 To develop against an unreleased version of the Deephaven core images, change the base images as appropriate in [gradle.properties](gradle.properties).
