@@ -1,6 +1,9 @@
 name: Build CI
 
 on:
+  schedule:
+    # Every day at 10AM EST
+    - cron: '0 14 * * *'
   pull_request:
     branches: [ main ]
   push:
@@ -33,7 +36,7 @@ jobs:
         run: ./gradlew build
 
       - name: Login to ghcr.io
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: docker/login-action@v1.10.0
         with:
           registry: ghcr.io
@@ -41,5 +44,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Image
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: ./gradlew pushImage
