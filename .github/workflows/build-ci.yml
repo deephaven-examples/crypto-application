@@ -54,4 +54,4 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEVREL }}
         with:
-          payload: '{"repository": "${{ github.repository }}", "message": "Testing...", "link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+          payload: '{"repository": "${{ github.repository }}", "message": "Job ${{ jobs.${{ github.job }}.name }} failure", "link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
