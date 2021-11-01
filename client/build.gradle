@@ -10,7 +10,7 @@ String base = project.property('client.base')
 String image = project.property('client.image')
 
 dependencies {
-    implementation "io.deephaven:deephaven-client-flight-dagger:${deephavenCoreVersion}"
+    implementation "io.deephaven:deephaven-java-client-flight-dagger:${deephavenCoreVersion}"
 
     implementation 'org.slf4j:slf4j-api:1.7.32'
     runtimeOnly 'ch.qos.logback:logback-classic:1.2.5'
