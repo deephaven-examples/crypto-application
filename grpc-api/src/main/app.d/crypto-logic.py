@@ -1,5 +1,5 @@
 import jpy
-from deephaven import KafkaTools as kt
+from deephaven import ConsumeKafka as kt
 
 def ops():
     return jpy.get_type('io.deephaven.crypto.Ops')
