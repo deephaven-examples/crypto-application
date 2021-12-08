@@ -4,13 +4,15 @@
     "isClosable": true,
     "reorderEnabled": true,
     "title": "",
+    "isFocusOnShow": true,
     "content": [
       {
         "type": "row",
         "isClosable": true,
         "reorderEnabled": true,
         "title": "",
-        "height": 31.04508196721312,
+        "height": 41.25654450261781,
+        "isFocusOnShow": true,
         "content": [
           {
             "type": "stack",
@@ -21,6 +23,7 @@
             "activeItemIndex": 0,
             "width": 64.23469387755101,
             "height": 31.04508196721312,
+            "isFocusOnShow": true,
             "content": [
               {
                 "type": "react-component",
@@ -36,18 +39,22 @@
                 "componentName": "lm-react-component",
                 "isClosable": true,
                 "reorderEnabled": true,
-                "componentState": null
+                "componentState": null,
+                "isFocusOnShow": true
               },
               {
                 "component": "LogPanel",
                 "isClosable": false,
                 "title": "Log",
                 "type": "react-component",
-                "props": {},
+                "props": {
+                  "metadata": {}
+                },
                 "id": "PKcCp3L3D",
                 "componentName": "lm-react-component",
                 "reorderEnabled": true,
-                "componentState": null
+                "componentState": null,
+                "isFocusOnShow": true
               }
             ]
           },
@@ -60,13 +67,14 @@
             "activeItemIndex": 0,
             "height": 100,
             "width": 35.765306122448976,
+            "isFocusOnShow": true,
             "content": [
               {
                 "type": "react-component",
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdXNkX3ByaWNlcw=="
+                    "table": "usd_prices"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -90,21 +98,7 @@
                         "aggregations": [],
                         "showOnTop": false
                       },
-                      "customColumnFormatMap": [
-                        [
-                          "USD",
-                          {
-                            "columnType": "decimal",
-                            "columnName": "USD",
-                            "format": {
-                              "label": "Custom Format",
-                              "type": "type-context-custom",
-                              "formatString": "$ #,##0.00",
-                              "multiplier": null
-                            }
-                          }
-                        ]
-                      ],
+                      "customColumnFormatMap": [],
                       "isFilterBarShown": false,
                       "quickFilters": [],
                       "sorts": [
@@ -129,13 +123,15 @@
                     "gridState": {
                       "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "USD Prices",
-                "id": "REACgFWsf",
+                "id": "psoyi9o0H",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               },
@@ -144,7 +140,7 @@
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2Yvc3RhcnRfdGltZQ=="
+                    "table": "start_time"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -187,13 +183,15 @@
                     "gridState": {
                       "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Start Time",
-                "id": "7L7hnDwWa",
+                "id": "ZW6a_9Mu-",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               }
@@ -206,7 +204,8 @@
         "isClosable": true,
         "reorderEnabled": true,
         "title": "",
-        "height": 68.95491803278689,
+        "height": 58.74345549738221,
+        "isFocusOnShow": true,
         "content": [
           {
             "type": "stack",
@@ -217,13 +216,14 @@
             "activeItemIndex": 0,
             "height": 100,
             "width": 53.31564986737402,
+            "isFocusOnShow": true,
             "content": [
               {
                 "type": "react-component",
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX3N1bW1hcnk="
+                    "table": "trades_summary"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -271,12 +271,7 @@
                           "direction": "DESC"
                         }
                       ],
-                      "userColumnWidths": [
-                        [
-                          "USD",
-                          0
-                        ]
-                      ],
+                      "userColumnWidths": [],
                       "userRowHeights": [],
                       "customColumns": [],
                       "reverseType": "none",
@@ -291,30 +286,20 @@
                     "gridState": {
                       "movedColumns": [
                         {
-                          "to": "Type",
-                          "from": "USD"
-                        },
-                        {
-                          "to": "Type",
-                          "from": "USD"
-                        },
-                        {
-                          "to": "DollarVolume",
-                          "from": "Count"
-                        },
-                        {
-                          "to": "Volume",
-                          "from": "USD"
+                          "to": "Count",
+                          "from": "DollarVolume"
                         }
                       ],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Trades Summary",
-                "id": "V__BuN4kl",
+                "id": "ToEdQFPRX",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               },
@@ -323,7 +308,7 @@
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX2xhdGVzdA=="
+                    "table": "trades_latest"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -355,11 +340,6 @@
                           "column": 1,
                           "isAbs": false,
                           "direction": "ASC"
-                        },
-                        {
-                          "column": 0,
-                          "isAbs": false,
-                          "direction": "ASC"
                         }
                       ],
                       "userColumnWidths": [],
@@ -377,13 +357,15 @@
                     "gridState": {
                       "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Trades Latest",
-                "id": "SO5LQ7CLh",
+                "id": "SuDl6LVWc",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               },
@@ -392,7 +374,7 @@
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvdHJhZGVzX3N0cmVhbQ=="
+                    "table": "trades_stream"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -435,13 +417,15 @@
                     "gridState": {
                       "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Trades Stream",
-                "id": "l8VHVY6Iu",
+                "id": "W-xglCt8r",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               }
@@ -456,13 +440,14 @@
             "activeItemIndex": 0,
             "width": 46.68435013262601,
             "height": 100,
+            "isFocusOnShow": true,
             "content": [
               {
                 "type": "react-component",
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvcXVvdGVzX2xhdGVzdA=="
+                    "table": "quotes_latest"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -494,11 +479,6 @@
                           "column": 1,
                           "isAbs": false,
                           "direction": "ASC"
-                        },
-                        {
-                          "column": 0,
-                          "isAbs": false,
-                          "direction": "ASC"
                         }
                       ],
                       "userColumnWidths": [],
@@ -514,20 +494,17 @@
                       "pendingDataMap": []
                     },
                     "gridState": {
-                      "movedColumns": [
-                        {
-                          "to": "Bid",
-                          "from": "BidSize"
-                        }
-                      ],
+                      "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Quotes Latest",
-                "id": "cYq4VLtfI",
+                "id": "tRLvKAn_j",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               },
@@ -536,7 +513,7 @@
                 "component": "IrisGridPanel",
                 "props": {
                   "metadata": {
-                    "table": "YS9pby5kZWVwaGF2ZW4uY3J5cHRvLkFwcGxpY2F0aW9uL2YvcXVvdGVzX3N0cmVhbQ=="
+                    "table": "quotes_stream"
                   },
                   "panelState": {
                     "irisGridPanelState": {
@@ -579,13 +556,15 @@
                     "gridState": {
                       "movedColumns": [],
                       "movedRows": []
-                    }
+                    },
+                    "pluginState": null
                   }
                 },
                 "title": "Quotes Stream",
-                "id": "1mhqS2-lh",
+                "id": "9pbd_uwW8",
                 "componentName": "lm-react-component",
                 "isClosable": true,
+                "isFocusOnShow": true,
                 "reorderEnabled": true,
                 "componentState": null
               }
