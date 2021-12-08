@@ -2,12 +2,9 @@ package io.deephaven.crypto;
 
 import io.deephaven.api.ColumnName;
 import io.deephaven.api.TableOperations;
-import io.deephaven.api.agg.Avg;
 import io.deephaven.api.agg.Count;
-import io.deephaven.api.agg.Last;
-import io.deephaven.api.agg.Med;
 import io.deephaven.api.agg.Pair;
-import io.deephaven.api.agg.Sum;
+import io.deephaven.api.agg.spec.AggSpec;
 import io.deephaven.api.filter.Filter;
 import io.deephaven.qst.TableCreator;
 import io.deephaven.qst.column.header.ColumnHeader;
@@ -35,32 +32,30 @@ public class Ops {
   private static final ColumnName BASE_VOLUME = ColumnName.of("BaseVolume");
   private static final ColumnName CURRENCY = ColumnName.of("Currency");
 
+  private static final ColumnName MID = ColumnName.of("Mid");
+  private static final ColumnName USD = ColumnName.of("USD");
+
   public static <T extends TableOperations<T, ?>> T getTradesLatest(T trades) {
-    return trades.by(
-        Arrays.asList(EXCHANGE, INSTRUMENT, TYPE),
-        Arrays.asList(Last.of(ID), Last.of(TIMESTAMP), Last.of(PRICE), Last.of(SIZE)));
+    return trades.lastBy(EXCHANGE, INSTRUMENT, TYPE);
   }
 
   public static <T extends TableOperations<T, T>> T getTradesSummary(T trades, T usdPrices) {
     return trades
         .updateView("BaseVolume=Price*Size")
-        .by(
-            Arrays.asList(EXCHANGE, INSTRUMENT, TYPE),
+        .aggBy(
             Arrays.asList(
                 Count.of(COUNT),
-                Sum.of(Pair.of(SIZE, VOLUME)),
-                Sum.of(BASE_VOLUME),
-                Avg.of(Pair.of(PRICE, AVG_PRICE))))
+                AggSpec.sum().aggregation(Pair.of(SIZE, VOLUME)),
+                AggSpec.sum().aggregation(BASE_VOLUME),
+                AggSpec.avg().aggregation(Pair.of(PRICE, AVG_PRICE))),
+            Arrays.asList(EXCHANGE, INSTRUMENT, TYPE))
         .updateView("Currency=Instrument.split(`/`)[1]")
         .naturalJoin(usdPrices, Collections.singleton(CURRENCY), Collections.emptyList())
         .updateView("DollarVolume=USD * BaseVolume");
   }
 
   public static <T extends TableOperations<T, ?>> T getQuotesLatest(T quotes) {
-    return quotes.by(
-        Arrays.asList(EXCHANGE, INSTRUMENT),
-        Arrays.asList(
-            Last.of(TIMESTAMP), Last.of(BID), Last.of(ASK), Last.of(BID_SIZE), Last.of(ASK_SIZE)));
+    return quotes.lastBy(EXCHANGE, INSTRUMENT);
   }
 
   public static <T extends TableOperations<T, ?>> T getUsdPrices(
@@ -81,6 +76,8 @@ public class Ops {
                     Filter.isNotNull(TIMESTAMP), Filter.isNotNull(BID), Filter.isNotNull(ASK)))
             .where("Instrument.endsWith(`/USD`) || Instrument.endsWith(`/USDT`)")
             .view("Currency=Instrument.split(`/`)[0]", "Mid=(Bid+Ask)/2")
-            .by(Collections.singleton(CURRENCY), Collections.singletonList(Med.of("USD=Mid"))));
+            .aggBy(
+                AggSpec.median().aggregation(Pair.of(MID, USD)),
+                Collections.singletonList(CURRENCY)));
   }
 }

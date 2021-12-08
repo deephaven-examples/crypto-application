@@ -8,10 +8,10 @@ def configuration():
     return jpy.get_type('io.deephaven.crypto.kafka.Configuration')
 
 def table_creator():
-    return jpy.get_type('io.deephaven.db.tables.TableCreatorImpl').INSTANCE
+    return jpy.get_type('io.deephaven.engine.table.impl.TableCreatorImpl').INSTANCE
 
 def get_now_table():
-    return table_creator().emptyTable(1).select("Timestamp=DBDateTime.now()")
+    return table_creator().emptyTable(1).select("Timestamp=DateTime.now()")
 
 def get_trades_stream():
     return kt.consumeToTable(
