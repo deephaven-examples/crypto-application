@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     api project(':schemas')
-    api 'org.knowm.xchange:xchange-core:5.0.11'
-    api 'org.knowm.xchange:xchange-stream-core:5.0.11'
+    api 'org.knowm.xchange:xchange-core:5.0.12'
+    api 'org.knowm.xchange:xchange-stream-core:5.0.12'
 
     annotationProcessor 'org.immutables:value:2.8.8'
     compileOnly 'org.immutables:value-annotations:2.8.8'

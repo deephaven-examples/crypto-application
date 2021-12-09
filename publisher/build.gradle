@@ -32,7 +32,7 @@ dependencies {
         }
     }
 
-    runtimeOnly 'ch.qos.logback:logback-classic:1.2.5'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.2.7'
 }
 
 application {
