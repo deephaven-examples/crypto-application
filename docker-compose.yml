@@ -49,7 +49,7 @@ services:
       - redpanda:/var/lib/redpanda/data
 
   grpc-proxy:
-    image: ghcr.io/deephaven/grpc-proxy:0.6.0
+    image: ghcr.io/deephaven/grpc-proxy:0.7.0
     environment:
       - BACKEND_ADDR=grpc-api:8080
     deploy:
@@ -62,7 +62,7 @@ services:
         condition: service_healthy
 
   envoy:
-    image: ghcr.io/deephaven/envoy:0.6.0
+    image: ghcr.io/deephaven/envoy:0.7.0
     ports:
       - "${PORT}:10000"
 
