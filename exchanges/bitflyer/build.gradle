@@ -4,6 +4,6 @@ plugins {
 
 dependencies {
     implementation project(':xchange-adapter')
-    implementation 'org.knowm.xchange:xchange-bitflyer:5.0.11'
-    implementation 'org.knowm.xchange:xchange-stream-bitflyer:5.0.11'
+    implementation 'org.knowm.xchange:xchange-bitflyer:5.0.12'
+    implementation 'org.knowm.xchange:xchange-stream-bitflyer:5.0.12'
 }
