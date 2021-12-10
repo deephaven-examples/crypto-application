@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.exceptions.ExchangeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +22,13 @@ public class Entrypoint {
     final List<StreamingExchange> exchanges = new ArrayList<>();
     for (Specification specification : Specification.load()) {
       log.info("Starting exchange from '{}'", specification.streamingClass());
-      final StreamingExchange exchange =
-          StreamingExchangeFactory.INSTANCE.createExchange(specification.streamingClass());
+      final StreamingExchange exchange;
+      try {
+        exchange = StreamingExchangeFactory.INSTANCE.createExchange(specification.streamingClass());
+      } catch (ExchangeException e) {
+        log.error("Error, continuing...", e);
+        continue;
+      }
       connect(specification, exchange);
       subscribeTrades(specification, exchange, tradesObserver);
       subscribeQuotes(specification, exchange, quotesObserver);
