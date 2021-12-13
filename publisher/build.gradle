@@ -17,8 +17,8 @@ String base = project.property('publisher.base')
 String image = project.property('publisher.image')
 
 dependencies {
-    implementation 'org.apache.kafka:kafka-clients:7.0.0-ce'
-    implementation 'io.confluent:kafka-avro-serializer:7.0.0'
+    implementation 'org.apache.kafka:kafka-clients:7.0.1-ccs'
+    implementation 'io.confluent:kafka-avro-serializer:7.0.1'
 
     implementation project(':common')
     implementation project(':schemas')
