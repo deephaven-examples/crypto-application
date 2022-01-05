@@ -30,7 +30,7 @@ public class Main {
   }
 
   public static void main(String[] args) throws Exception {
-    final String target = System.getenv("DEEPHAVEN_GRPC_API");
+    final String target = System.getenv("DEEPHAVEN_SERVER");
     log.info("Connecting to '{}'...", target);
 
     final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);

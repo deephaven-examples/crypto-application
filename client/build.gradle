@@ -12,8 +12,8 @@ String image = project.property('client.image')
 dependencies {
     implementation "io.deephaven:deephaven-java-client-flight-dagger:${deephavenCoreVersion}"
 
-    implementation 'org.slf4j:slf4j-api:1.7.32'
-    runtimeOnly 'ch.qos.logback:logback-classic:1.2.7'
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha5'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.3.0-alpha12'
 }
 
 application {
