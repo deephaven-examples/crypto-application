@@ -7,7 +7,7 @@ The crypto application is a multifaceted example that extends the [Deephaven Com
 The [publisher](publisher) connects directly to a number of cryptocurrency exchanges via the [XChange](https://github.com/knowm/XChange)
 library, and publishes quotes and trades into a [Redpanda](https://vectorized.io/redpanda) [Kafka server](redpanda).
 
-The [Deephaven server](grpc-api) consumes the Kafka feed, and creates a number of useful tables from the cryptocurrency quotes and trades.
+The [Deephaven server](server) consumes the Kafka feed, and creates a number of useful tables from the cryptocurrency quotes and trades.
 
 The [web](web) server packages up a specific layout for the cryptocurrency tables.
 

@@ -14,8 +14,8 @@ services:
           cpus: '4.0'
           memory: 1500M
 
-  grpc-api:
-    image: ghcr.io/deephaven-examples/crypto-application-grpc-api:latest
+  server:
+    image: ghcr.io/deephaven-examples/crypto-application-server:latest
     environment:
       JAVA_TOOL_OPTIONS: -Xmx4g -Ddeephaven.console.type=python -Ddeephaven.application.dir=/app.d
       DEEPHAVEN_BOOTSTRAP_SERVERS: redpanda:9092
@@ -49,20 +49,20 @@ services:
       - redpanda:/var/lib/redpanda/data
 
   grpc-proxy:
-    image: ghcr.io/deephaven/grpc-proxy:0.7.0
+    image: ghcr.io/deephaven/grpc-proxy:0.8.0
     environment:
-      - BACKEND_ADDR=grpc-api:8080
+      - BACKEND_ADDR=server:8080
     deploy:
       resources:
         limits:
           cpus: '1'
           memory: 256M
     depends_on:
-      grpc-api:
+      server:
         condition: service_healthy
 
   envoy:
-    image: ghcr.io/deephaven/envoy:0.7.0
+    image: ghcr.io/deephaven/envoy:0.8.0
     ports:
       - "10042:10000"
 
@@ -72,7 +72,7 @@ services:
           cpus: '1'
           memory: 256M
     depends_on:
-      grpc-api:
+      server:
         condition: service_healthy
       grpc-proxy:
         condition: service_started
@@ -82,14 +82,14 @@ services:
   client:
     image: ghcr.io/deephaven-examples/crypto-application-client:latest
     environment:
-      DEEPHAVEN_GRPC_API: grpc-api:8080
+      DEEPHAVEN_SERVER: server:8080
     deploy:
       resources:
         limits:
           cpus: '1.0'
           memory: 512M
     depends_on:
-      grpc-api:
+      server:
         condition: service_healthy
       publisher:
         condition: service_started

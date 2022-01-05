@@ -8,7 +8,7 @@ include(':common')
 
 include('publisher')
 
-include('grpc-api')
+include('server')
 
 include('web')
 

@@ -9,8 +9,8 @@ plugins {
 }
 
 String deephavenCoreVersion = project.property('deephaven-core.version')
-String base = project.property('grpc-api.base')
-String image = project.property('grpc-api.image')
+String base = project.property('server.base')
+String image = project.property('server.image')
 def labels = [ 'maintainer': project.property('maintainer') ] + project.properties.findAll { it -> it.key.startsWith('org.opencontainers.image.') }
 
 dependencies {
@@ -29,8 +29,10 @@ def imageId = imageIdFile.exists() ? imageIdFile.text : null
 
 def createDockerfile = project.tasks.register('createDockerfile', Dockerfile) {
     it.from base
-    it.copyFile 'libs/', '/app/libs'
+    it.copyFile 'libs/', "/opt/deephaven/server-${deephavenCoreVersion}/lib"
     it.copyFile 'app.d/', '/app.d'
+    // TODO: Remove start script workaround https://github.com/deephaven-examples/crypto-application/issues/14
+    it.copyFile 'script/start', "/opt/deephaven/server-${deephavenCoreVersion}/bin/start"
     it.label(labels)
     it.destFile.set dockerfileDest
 }
@@ -40,6 +42,9 @@ def prepareDocker = project.tasks.register('prepareDocker', Sync) {
     it.from dockerfileDest
     it.from('src/main/app.d') {
         into 'app.d'
+    }
+    it.from('src/main/script') {
+        into 'script'
     }
     it.from(configurations.runtimeClasspath) {
         into 'libs'
