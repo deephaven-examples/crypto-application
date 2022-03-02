@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':xchange-adapter')
-    // implementation 'org.knowm.xchange:xchange-okex:5.0.12'
+    // implementation 'org.knowm.xchange:xchange-okex:5.0.13'
     // okcoin provides okex streaming?
-    implementation 'org.knowm.xchange:xchange-stream-okcoin:5.0.12'
+    implementation 'org.knowm.xchange:xchange-stream-okcoin:5.0.13'
 }

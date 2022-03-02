@@ -4,6 +4,6 @@ plugins {
 
 dependencies {
     implementation project(':xchange-adapter')
-    implementation 'org.knowm.xchange:xchange-bitstamp:5.0.12'
-    implementation 'org.knowm.xchange:xchange-stream-bitstamp:5.0.12'
+    implementation 'org.knowm.xchange:xchange-bitstamp:5.0.13'
+    implementation 'org.knowm.xchange:xchange-stream-bitstamp:5.0.13'
 }
