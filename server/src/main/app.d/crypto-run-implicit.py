@@ -8,5 +8,6 @@ def initialize_implicitly(func: Callable[[], None]):
     for key, value in new_globals.items():
         if not key in globals().keys() or globals()[key] != value:
             app.setField(key, value)
+            globals()[key] = value
 
 initialize_implicitly(crypto_start)
