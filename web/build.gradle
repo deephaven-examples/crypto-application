@@ -21,7 +21,7 @@ def createDockerfile = project.tasks.register('createDockerfile', Dockerfile) {
     it.from base
     // COPY --chown=www-data layouts/ /data/layouts
     it.copyFile 'layouts', '/data/layouts'
-    it.runCommand 'chown www-data:www-data /data/layouts'
+//    it.runCommand 'chown www-data:www-data /data/layouts'
     it.label(labels)
     it.destFile.set dockerfileDest
 }

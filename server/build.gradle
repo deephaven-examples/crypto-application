@@ -29,10 +29,10 @@ def imageId = imageIdFile.exists() ? imageIdFile.text : null
 
 def createDockerfile = project.tasks.register('createDockerfile', Dockerfile) {
     it.from base
-    it.copyFile 'libs/', "/opt/deephaven/server-${deephavenCoreVersion}/lib"
+    it.copyFile 'libs/', "/opt/deephaven/server-0.12.0/lib"
     it.copyFile 'app.d/', '/app.d'
     // TODO: Remove start script workaround https://github.com/deephaven-examples/crypto-application/issues/14
-    it.copyFile 'script/start', "/opt/deephaven/server-${deephavenCoreVersion}/bin/start"
+    it.copyFile 'script/start', "/opt/deephaven/server-0.12.0/bin/start"
     it.label(labels)
     it.destFile.set dockerfileDest
 }
