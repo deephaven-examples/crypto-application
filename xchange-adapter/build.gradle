@@ -6,7 +6,8 @@ dependencies {
     api project(':schemas')
     api 'org.knowm.xchange:xchange-core:5.2.2'
     api 'org.knowm.xchange:xchange-stream-core:5.2.2'
-
+    api 'io.reactivex.rxjava2:rxjava:2.2.21'  // Add this line for RxJava 2.x
+    
     annotationProcessor 'org.immutables:value:2.8.8'
     compileOnly 'org.immutables:value-annotations:2.8.8'
 }
