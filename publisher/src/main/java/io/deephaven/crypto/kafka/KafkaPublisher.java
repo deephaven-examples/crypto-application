@@ -5,7 +5,6 @@ import io.confluent.kafka.serializers.subject.TopicRecordNameStrategy;
 import io.deephaven.crypto.Entrypoint;
 import io.deephaven.crypto.Quote;
 import io.deephaven.crypto.Trade;
-import io.reactivex.rxjava3.core.Observer;
 import java.time.Duration;
 import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
