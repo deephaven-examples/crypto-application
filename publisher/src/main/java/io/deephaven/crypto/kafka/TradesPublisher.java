@@ -1,8 +1,8 @@
 package io.deephaven.crypto.kafka;
 
 import io.deephaven.crypto.Trade;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import java.util.Objects;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
