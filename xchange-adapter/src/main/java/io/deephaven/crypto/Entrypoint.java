@@ -4,7 +4,7 @@ import info.bitrich.xchangestream.core.ProductSubscription;
 import info.bitrich.xchangestream.core.ProductSubscription.ProductSubscriptionBuilder;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
-import io.reactivex.Observer;
+import io.reactivex.rxjava3.core.Observer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
