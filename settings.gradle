@@ -14,7 +14,7 @@ include('web')
 
 include('client')
 
-[ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'lgo', 'okcoin', 'okex', 'poloniex' ].each { String exchangeName ->
+[ 'binance', 'bitfinex', 'bitflyer', 'bitstamp', 'coinbase-pro', 'gemini', 'kraken', 'okcoin', 'poloniex' ].each { String exchangeName -> // Removed 'lgo' and 'okex' due to missing dependencies
     include(":${exchangeName}")
     project(":${exchangeName}").projectDir = file("exchanges/${exchangeName}")
 }
